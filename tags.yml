@@ -1,0 +1,38 @@
+- hosts: webservers
+
+  tasks:
+    # Updating the cache
+    - name: Update Package Cache (apt/Ubuntu)
+      apt:
+        update_cache: yes
+      become: yes # <---
+      #changed_when: false
+      #when: ansible_distribution == "Ubuntu"
+
+    # Installing git
+    - name: install git
+      tags: git
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: yes
+      become: yes # <---
+
+    #Create users
+    #Sherkesh
+    - name: Add the user 'Sherkesh'
+      tags: users
+      ansible.builtin.user:
+        name: Sherkesh
+        comment: Founder of the clan
+        uid: 2809
+      become: yes # <---
+
+    #Koiys
+    - name: Add the user 'Koiys'
+      tags: users
+      ansible.builtin.user:
+        name: Koiys
+        comment: Founder's descendent
+        uid: 2810
+      become: yes # <---
