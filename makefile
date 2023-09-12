@@ -13,5 +13,7 @@ gitDelete:
 usersCreate:
 	ansible-playbook tags.yml -i inventory.ini -t users -u root
 
+nginx:
+	ansible-playbook nginx.yml -i inventory.ini -u root
 
 
