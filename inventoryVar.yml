@@ -1,9 +1,5 @@
 - hosts: webservers
 
-  vars:
-    nginx_port: "8080"
-    root_dir: files
-
   tasks:
     - name: install nginx
       ansible.builtin.apt:
@@ -13,13 +9,13 @@
 
     - name: copy html
       ansible.builtin.copy:
-        src: "{{root_dir}}/index.html"
+        src: files/index.html
         dest: /usr/share/nginx/html/index.html
       become: yes
 
     - name: copy config path
-      ansible.builtin.template:
-        src: "{{root_dir}}/nginx.conf"
+      ansible.builtin.copy:
+        src: files/nginx.conf
         dest: /etc/nginx/nginx.conf
       notify:
         - restart nginx

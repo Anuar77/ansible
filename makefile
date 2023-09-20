@@ -16,4 +16,7 @@ usersCreate:
 nginx:
 	ansible-playbook nginx.yml -i inventory.ini -u root
 
+inventoryVar:
+	ansible-playbook inventoryVar.yml -i inventory.ini -u root
+
 
