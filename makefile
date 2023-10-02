@@ -19,4 +19,6 @@ nginx:
 inventoryVar:
 	ansible-playbook inventoryVar.yml -i inventory.ini -u root
 
+userGitConfig:
+	ansible-playbook loops.yml -i inventory.ini -u root
 

@@ -1,0 +1,40 @@
+- hosts: webservers
+
+  vars:
+    users: ["oneU", "TwoU", "ThreeU"]
+
+  tasks:
+    - name: add test users
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ users }}"
+
+    - name: Copy .gitconfig for Users
+      template:
+        src: gitconfig.j2
+        dest: "/home/{{ item }}/.gitconfig"
+      with_items: "{{ users }}"
+      #notify: Reload Git
+
+    - name: Ensure user's .ssh directory exists
+      file:
+        path: "/home/{{ item }}/.ssh"
+        state: directory
+        owner: "{{ item }}"
+        group: "{{ item }}"
+        mode: "0700"
+      with_items: "{{ users }}"
+      when: not ansible_check_mode # This condition ensures it's not in check mode
+
+    - name: Copy and paste SSH keys to users
+      copy:
+        src: ssh.pub
+        dest: "/home/{{ item }}/.ssh/authorized_keys"
+        owner: "{{ item }}"
+        mode: "0600"
+      with_items: "{{ users }}"
+
+  # handlers:
+  #   - name: Reload Git
+  #     command: git --version
