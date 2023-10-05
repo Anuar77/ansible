@@ -22,3 +22,6 @@ inventoryVar:
 userGitConfig:
 	ansible-playbook loops.yml -i inventory.ini -u root
 
+filters:
+	ansible-playbook filters.yml -i inventory.ini -u root
+

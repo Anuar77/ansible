@@ -1,0 +1,26 @@
+- hosts: webservers
+
+  vars:
+    serverWeb: "This is server web1!"
+
+  tasks:
+    - name: Create directory
+      file:
+        path: "templates"
+        state: directory
+
+    - name: render html template
+      template:
+        src: templates/index.html.j2
+        dest: templates/index.html.j2
+      vars:
+        upper_message: "{{ serverWeb }}"
+
+    - name: Display Rendered File Contents
+      command: cat templates/index.html.j2/index.html.j2 # Specify the path to your rendered HTML file
+      register: file_contents
+      ignore_errors: yes # Ignore errors if the file doesn't exist or other issues
+
+    - name: Debug Rendered File Contents
+      debug:
+        var: file_contents.stdout_lines
