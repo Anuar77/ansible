@@ -1,0 +1,35 @@
+- hosts: webservers
+
+  vars:
+    nginx_port: "8080"
+    root_dir: files
+
+  tasks:
+    - name: install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: latest
+      become: yes
+
+    - name: copy config path
+      ansible.builtin.template:
+        src: "{{root_dir}}/nginx.conf"
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - restart nginx
+      become: yes
+
+    - name: cowsay command
+      ansible.builtin.shell: ls
+      register: cowsay
+
+    - name: print what the cow said
+      ansible.builtin.debug:
+        var: cowsay
+
+  handlers:
+    - name: restart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
+      become: yes

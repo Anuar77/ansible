@@ -25,3 +25,6 @@ userGitConfig:
 filters:
 	ansible-playbook filters.yml -i inventory.ini -u root
 
+register:
+	ansible-playbook register.yml -i inventory.ini -u root
+
