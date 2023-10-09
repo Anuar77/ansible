@@ -28,3 +28,6 @@ filters:
 register:
 	ansible-playbook register.yml -i inventory.ini -u root
 
+import:
+	ansible-playbook Import/main.yml -i inventory.ini -u root
+

@@ -1,0 +1,11 @@
+# - hosts: webservers
+
+# vars:
+#   userOne: Panther
+#   userTwo: Lion
+
+# tasks:
+- name: add a user
+  ansible.builtin.user:
+    name: "{{ userOne }}"
+    state: present

@@ -1,0 +1,21 @@
+# - hosts: webservers
+
+#   vars:
+#     userOne: Panther
+#     userTwo: Lion
+
+# tasks:
+- name: delete a user
+  ansible.builtin.user:
+    name: "{{ userOne }}"
+    state: absent
+
+- name: delete a user
+  ansible.builtin.user:
+    name: "userOne"
+    state: absent
+
+- name: delete a user
+  ansible.builtin.user:
+    name: "userTwo"
+    state: absent
