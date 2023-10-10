@@ -1,0 +1,19 @@
+- hosts: webservers
+
+  roles:
+    - geerlingguy.git
+
+  tasks:
+    - name: add test users
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - Mysyk
+
+    - name: Copy .gitconfig for Users
+      template:
+        src: gitconfig.j2
+        dest: "/home/{{ item }}/.gitconfig"
+      loop:
+        - Mysyk

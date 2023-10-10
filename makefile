@@ -31,3 +31,5 @@ register:
 import:
 	ansible-playbook Import/main.yml -i inventory.ini -u root
 
+roles:
+	ansible-playbook Roles/main.yml -i inventory.ini -u root
