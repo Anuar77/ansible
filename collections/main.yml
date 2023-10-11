@@ -1,0 +1,17 @@
+- hosts: webservers
+
+  tasks:
+    - name: install git
+      tags: git
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: yes
+      become: yes # <---
+
+    - name: Update / Insert a ssh key
+      tags: ssh
+      ansible.posix.authorized_key:
+        user: Sherkesh
+        state: present
+        key: "{{ lookup('file', 'ssh.pub') }}"

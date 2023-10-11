@@ -33,3 +33,6 @@ import:
 
 roles:
 	ansible-playbook Roles/main.yml -i inventory.ini -u root
+
+collections:
+	ansible-playbook collections/main.yml -i inventory.ini -t ssh -u root
